@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Web app</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+<link rel="stylesheet" type="text/css"
+	href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+
+	<nav class="navbar navbar-inverse">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Web app</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="./">Home</a></li>
+					<li><a onclick="alert('Working on progress');">About</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+		<div class="starter-template">
+			<h1>Product List</h1>
+			<p>We want you to implements a simple web application to show
+				product information. Hence, the product have different attributes.
+				As an example: Air Conditioner product is different from Slipper
+				product. Slipper may have size while Air Condition does not have it.
+				Also, some product may have ratings, some may not have. The
+				challenge here, how we can design the API in such way when a new
+				product introduce with different attributes we do not need to modify
+				API design itself.</p>
+			<p style="display: none">You can submit your code in github, and
+				we will check it. Hopefully, you can finish it up by end of next
+				week (Friday, 20 October 2017). When you have completed the task,
+				you can leave a message here (with attention to: Isak Rabin - me).
+				If you have more questions and more time, please do let me know as
+				well. Thanks, Isak Rabin</p>
+		</div>
+		
+		<div class="row" th:each="i: ${#numbers.sequence(0, products.size())}">
+			<div class="col-md-4 col-xs-12" th:each="j: ${#numbers.sequence(i * 3, i * 3 + 2)}" th:if="${products.size() gt j}" th:with="product=${products.get(j)}" >
+				<h2 th:text="${product.name}" ></h2>
+				<h4>Rating: <small th:text="${#strings.defaultString(product.rating,'No Rating')}" >Rating</small></h4>
+				<h4>Description:</h4> <p th:text="${#strings.defaultString(product.description,'')}" class="text-justify">Description</p>
+				<h4 th:unless="${#lists.isEmpty(product.attributes)}"><a data-toggle="collapse" th:attr="data-target='#attr_'+${product.id }" >Attributes <span class="glyphicon glyphicon-collapse-down"></span></a></h4>
+				<ul th:id="'attr_' + ${product.id}" class="collapse">
+					<li th:each="attribute: ${product.attributes}" th:text="${attribute.name} + ' ' + ${attribute.value}"></li>
+				</ul>
+			</div>
+		</div>
+
+<!-- 		<ul> -->
+<!-- 			<li th:each="product: ${products}" ><h2 th:text="${product.name}"></h2> -->
+<!-- 			<p>Rating: <span th:text="${#strings.defaultString(product.rating,'No Rating')}" ></span></p> -->
+<!-- 			<p>Description: <span th:text="${#strings.defaultString(product.description,'')}" ></span></p> -->
+<!-- 				<ul> -->
+<!-- 				<li th:each="attribute: ${product.attributes}" th:text="${attribute.name} + ' ' + ${attribute.value}"></li> -->
+<!-- 				</ul> -->
+<!-- 			</li> -->
+<!-- 		</ul> -->
+	</div>
+	<!-- /.container -->
+
+	<script type="text/javascript"
+        src="webjars/jquery/2.2.4/jquery.min.js"></script>
+	<script type="text/javascript"
+		src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+</body>
+</html>
+

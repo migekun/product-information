@@ -1,5 +1,6 @@
 package org.coding.test.service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -10,17 +11,33 @@ public class Product {
 	private Integer id;
 	private String name;
 	private String description;
+	private String rating;
 	private Collection<Attribute> attributes;
 	
-	private Product(Integer id, String name, String description, Collection<Attribute> attributes) {
+	private Product(Integer id, String name, String description, String rating) {
+		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
+		this.rating = rating;
+		this.attributes = new ArrayList<>();
+	}
+
+	private Product(Integer id, String name, String description, String rating, Collection<Attribute> attributes) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.rating = rating;
 		this.attributes = attributes;
 	}
+
+	public static Product newInstance(Integer id, String name, String description, String rating, Collection<Attribute> attributes) {
+		return new Product(id, name, description, rating, attributes);
+	}
 	
-	public static Product newInstance(Integer id, String name, String description, Collection<Attribute> attributes) {
-		return new Product(id, name, description, attributes);
+	public static Product newInstance(Integer id, String name, String description, String rating) {
+		return new Product(id, name, description, rating);
 	}
 	
 	public Integer getId() {
@@ -48,6 +65,14 @@ public class Product {
 		this.attributes = attributes;
 	}
 	
+	public String getRating() {
+		return rating;
+	}
+
+	public void setRating(String rating) {
+		this.rating = rating;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
