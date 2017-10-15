@@ -1,4 +1,4 @@
-package org.coding.test.service;
+package org.coding.test.model;
 
 import java.util.ArrayList;
 import java.util.Collection;

@@ -1,4 +1,4 @@
-package org.coding.test.service;
+package org.coding.test.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
