@@ -4,9 +4,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.coding.test</groupId>
-	<artifactId>demo</artifactId>
+	<artifactId>productInformation</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>productInformation</name>
 	<description>Demo project for Product Information</description>
@@ -22,6 +22,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<start-class>org.coding.test.ProductInformationApplication</start-class>
 	</properties>
 
 	<dependencies>
@@ -51,14 +52,23 @@
 			<artifactId>bootstrap</artifactId>
 			<version>3.3.7</version>
 		</dependency>
+		
 		<dependency>
             <groupId>org.webjars</groupId>
             <artifactId>jquery</artifactId>
             <version>2.2.4</version>
         </dependency>
+        
+        <dependency>
+        	<groupId>org.springframework.boot</groupId>
+        	<artifactId>spring-boot-starter-tomcat</artifactId>
+        	<scope>provided</scope>
+    	</dependency>
+        
 	</dependencies>
 
 	<build>
+		<finalName>productList</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
