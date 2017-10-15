@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Web app</title>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
-<link rel="stylesheet" type="text/css"
-	href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+	<title>Web app</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+	<link rel="stylesheet" type="text/css"
+		href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+	<link rel="stylesheet" th:href="@{/css/main.css}"
+		href="../../css/main.css" />
 </head>
 <body>
 
@@ -22,10 +24,13 @@
 			</div>
 		</div>
 	</nav>
-
 	<div class="container">
-		<div class="starter-template">
-			<h1>Product List</h1>
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item">
+				Product List
+			</li>
+		</ol>
+		<div>
 			<p>We want you to implements a simple web application to show
 				product information. Hence, the product have different attributes.
 				As an example: Air Conditioner product is different from Slipper
@@ -34,35 +39,31 @@
 				challenge here, how we can design the API in such way when a new
 				product introduce with different attributes we do not need to modify
 				API design itself.</p>
-			<p style="display: none">You can submit your code in github, and
-				we will check it. Hopefully, you can finish it up by end of next
-				week (Friday, 20 October 2017). When you have completed the task,
-				you can leave a message here (with attention to: Isak Rabin - me).
-				If you have more questions and more time, please do let me know as
-				well. Thanks, Isak Rabin</p>
 		</div>
-		
-		<div class="row" th:each="i: ${#numbers.sequence(0, products.size())}">
-			<div class="col-md-4 col-xs-12" th:each="j: ${#numbers.sequence(i * 3, i * 3 + 2)}" th:if="${products.size() gt j}" th:with="product=${products.get(j)}" >
-				<h2 th:text="${product.name}" ></h2>
-				<h4>Rating: <small th:text="${#strings.defaultString(product.rating,'No Rating')}" >Rating</small></h4>
-				<h4>Description:</h4> <p th:text="${#strings.defaultString(product.description,'')}" class="text-justify">Description</p>
-				<h4 th:unless="${#lists.isEmpty(product.attributes)}"><a data-toggle="collapse" th:attr="data-target='#attr_'+${product.id }" >Attributes <span class="glyphicon glyphicon-collapse-down"></span></a></h4>
-				<ul th:id="'attr_' + ${product.id}" class="collapse">
-					<li th:each="attribute: ${product.attributes}" th:text="${attribute.name} + ' ' + ${attribute.value}"></li>
-				</ul>
+	</div>
+	<div class="container">
+		<div class="row" th:each="i: ${#numbers.sequence(0, (products.size() % 3) + 1)}">
+			<div class="col-md-4 col-xs-12 text-center show-area" th:each="j: ${#numbers.sequence(i * 3, i * 3 + 2)}" th:if="${products.size() gt j}" th:with="product=${products.get(j)}" >
+				<div class="product">
+					<div class="product-title"><!-- Better show img at this div -->
+						<h2 th:text="${product.name}"></h2>
+					</div>
+					<div class="product-body">
+						<h4>Rating: <small th:text="${#strings.defaultString(product.rating,'No Rating')}" >Rating</small></h4>
+						<p th:text="${#strings.defaultString(product.description,'')}">Description</p>
+					</div>
+					<div class="product-footer">
+						<h4 ><a data-toggle="collapse" th:attr="data-target='#attr_'+${product.id }" class="btn btn-secondary">Attributes <span class="glyphicon glyphicon-collapse-down"></span></a></h4>
+					</div>
+					<div class="product-attr">
+						<ul th:id="'attr_' + ${product.id}" class="collapse" >
+							<li th:if="${#lists.isEmpty(product.attributes)}">No attributes found</li>
+							<li th:each="attribute: ${product.attributes}" th:text="${attribute.name} + ' ' + ${attribute.value}"></li>
+						</ul>
+					</div>
+				</div>
 			</div>
 		</div>
-
-<!-- 		<ul> -->
-<!-- 			<li th:each="product: ${products}" ><h2 th:text="${product.name}"></h2> -->
-<!-- 			<p>Rating: <span th:text="${#strings.defaultString(product.rating,'No Rating')}" ></span></p> -->
-<!-- 			<p>Description: <span th:text="${#strings.defaultString(product.description,'')}" ></span></p> -->
-<!-- 				<ul> -->
-<!-- 				<li th:each="attribute: ${product.attributes}" th:text="${attribute.name} + ' ' + ${attribute.value}"></li> -->
-<!-- 				</ul> -->
-<!-- 			</li> -->
-<!-- 		</ul> -->
 	</div>
 	<!-- /.container -->
 
