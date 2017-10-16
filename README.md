@@ -8,8 +8,8 @@
 
 ##### From Eclipse (Spring Tool Suite)
 
-Import as Existing Maven Project and run it as Spring Boot App.
-Run application.
+Import as Existing Maven Project and run it as Spring Boot App.</br>
+Run application.</br>
 Browser URL: http://localhost:8080/
 
 ##### From Terminal
