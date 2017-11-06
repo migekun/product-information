@@ -43,7 +43,7 @@ public class ProductServiceImpl implements ProductService {
 	 * @return the expected product or null if it doesn't exists
 	 */
 	public Product getProduct(int id) {
-		 return dataBase.stream().filter(product -> product.equals(id)).findFirst().orElse(null);
+		 return dataBase.stream().filter(product -> product.getId() == id).findFirst().orElse(null);
 	}
 	
 	private Collection<Attribute> slipperAttr() {
