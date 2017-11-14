@@ -3,9 +3,11 @@ package org.coding.test.model;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.Entity;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
+@Entity
 public class Product {
 
 	private Integer id;
